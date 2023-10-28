@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Find part</string>
+    <string name="add_new_shop_item">Add new shop item</string>
+    <string name="order_number">Номер заказа</string>
+    <string name="name_of_detail">Наименование</string>
+    <string name="count">Количество</string>
+    <string name="time">время</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="date">дата</string>
+    <string name="name_of_part">Название детали</string>
+    <string name="save">Сохранить</string>
+    <string name="location">Место</string>
+</resources>
