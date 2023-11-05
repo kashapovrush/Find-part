@@ -1,13 +1,17 @@
 package com.kashapovrush.presentation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.kashapovrush.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +49,32 @@ class MainActivity : AppCompatActivity() {
 
         setupOnCLickListener()
         setupOnTouchHelper(rvPart)
+        setSearchView()
+    }
+
+    private fun setSearchView() {
+        binding.searchParts.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(text: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(text: String?): Boolean {
+                if (text != null) {
+                    searchList(text)
+                }
+                return true
+            }
+        })
+    }
+
+    fun searchList(text: String) {
+        val text = "%$text%"
+
+        viewModel.getPartByName(text).observe(this) {
+            it.let {
+                partAdapter.submitList(it)
+            }
+        }
     }
 
     private fun setupOnCLickListener() {

@@ -1,6 +1,7 @@
 package com.kashapovrush.domain
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 interface PartRepository {
 
@@ -12,6 +13,8 @@ interface PartRepository {
 
     suspend fun getPartItem(id: Int): Part
 
-    fun getPartsList(): LiveData<List<Part>>
+    fun getPartsList(): Flow<List<Part>>
+
+    fun getPartByName(text: String): Flow<List<Part>>
 
 }
